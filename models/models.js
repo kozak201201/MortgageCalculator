@@ -7,7 +7,7 @@ const User = db.define('user', {
 });
 
 const Bank = db.define('bank', {
-    id: {type: DataTypes.INTEGER, primaryKey: true},
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     name: {type: DataTypes.STRING, unique: true, allowNull: false},
     interestRate: {type: DataTypes.SMALLINT, allowNull: false},
     maxLoan: {type: DataTypes.INTEGER, allowNull: false},

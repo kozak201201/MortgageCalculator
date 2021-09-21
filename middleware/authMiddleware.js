@@ -1,6 +1,6 @@
 module.exports = function(req, res, next) {
     if (!req.user) {
-        res.redirect('/api/auth/google');
+        res.sendStatus(401);
     } else {
         next();
     }

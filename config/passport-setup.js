@@ -3,11 +3,11 @@ const {Strategy} = require('passport-google-oauth20');
 const { User } = require('../models/models');
 
 passport.serializeUser((user,done) => {
-    done(null, user.id);
+    done(null, user);
 });
 
-passport.deserializeUser((id, done) => {
-    User.findByPk(id).then(user => {
+passport.deserializeUser((user, done) => {
+    User.findByPk(user.id, {raw: true}).then(user => {
         done(null, user);
     })
 })
