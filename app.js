@@ -13,6 +13,8 @@ const indexRouter = require('./routes/indexRouter');
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+app.set('view engine', 'ejs');
+
 app.use(cors());
 app.use(express.json());
 app.use(cookieSession({
@@ -22,7 +24,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api', indexRouter);
+app.use('/', indexRouter);
 
 (async() => {
     await db.authenticate();

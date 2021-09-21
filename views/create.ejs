@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <li><a href="/">Home</a></li>
+    <label for="name">name</label><input type="text" name="" id="name"><br>
+    <label for="interestRate">interestRate</label><input type="number" name="" id="interestRate"><br>
+    <label for="maxLoan">maxLoan</label><input type="number" name="" id="maxLoan"><br>
+    <label for="minDownPayment">minDownPayment</label><input type="number" name="" id="minDownPayment"><br>
+    <label for="loanTermMonth">loanTermMonth</label><input type="number" name="" id="loanTermMonth"><br>
+    <button type="submit" id="submit">CREATE</button>
+    <script>
+
+        document.getElementById('submit').addEventListener('click', () => {
+            const name = document.getElementById('name').value;
+            const interestRate = +document.getElementById('interestRate').value;
+            const maxLoan = +document.getElementById('maxLoan').value;
+            const minDownPayment = +document.getElementById('minDownPayment').value;
+            const loanTermMonth = +document.getElementById('loanTermMonth').value;
+
+            const request = new XMLHttpRequest();
+            request.open('POST', 'http://localhost:5000/api/banks', true);
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.onreadystatechange = () => {
+                if (request.readyState == 4) {
+                    if (request.status == 200) {
+                        alert("Success create bank");
+                    } else {
+                        alert("Error create bank");
+                        console.log(request.status);
+                        console.log(request.response);
+                    }
+                }
+            }
+            request.send(JSON.stringify({name, interestRate, maxLoan, minDownPayment, loanTermMonth}));
+        });
+    </script>
+</body>
+</html>

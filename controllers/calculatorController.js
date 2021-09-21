@@ -1,6 +1,6 @@
 const {Bank} = require('../models/models');
 const BankValidator = require('../models/bankValidator');
-
+const mortgageCalculator = require('../models/mortgageCalculator');
 
 class CalculatorController {
     async calculate(req, res) {
@@ -15,16 +15,14 @@ class CalculatorController {
             const bankValidator = new BankValidator();
             bankValidator.checkMaxLoan(+initialLoan);
             
-            const downPaymentPercent = findDownPaymentPercent(+initialLoan, downPayment);
+            const downPaymentPercent = mortgageCalculator.findDownPaymentPercent(+initialLoan, downPayment);
             bankValidator.checkMinDownPayment(downPaymentPercent);
 
             if (bankValidator.errors.length != 0) {
                 return res.status(400).json({errors: bankValidator.errors});
             }
 
-            const amountBorrow = initialLoan - downPayment;
-            const monthlyLoanRate = bank.interestRate / 12;
-            const result = Math.ceil((amountBorrow * monthlyLoanRate) / (1 - monthlyLoanRate * (1 - bank.loanTermMonth)));
+            const result = mortgageCalculator.calculate(initialLoan, downPayment, bank);
 
             res.status(200).json(result);
         } catch (err) {
@@ -32,11 +30,6 @@ class CalculatorController {
             res.status(500).json({error: err.message});
         }
     }
-}
-
-function findDownPaymentPercent(maxLoan, downPayment) {
-    let result = (downPayment / maxLoan) * 100;
-    return result;
 }
 
 module.exports = new CalculatorController();

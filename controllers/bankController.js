@@ -45,7 +45,7 @@ class BankController {
             const bank = await Bank.findByPk(id);
 
             if (!bank) {
-                return res.sendStatus(400);
+                return res.status(400).json({error: `Bank with id:${id} didn't exist`});
             }
             
             const {

@@ -13,7 +13,7 @@ class BankValidator {
     }
 
     async checkIsUniqueName(name) {
-        const result = await Bank.findOne({name});
+        const result = await Bank.findOne({where: {name}});
 
         if (result) {
             this.errors.push('not unique name');

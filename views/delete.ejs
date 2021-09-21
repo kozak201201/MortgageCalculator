@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <li><a href="/">Home</a></li>
+    <label for="id">id</label><input type="number" name="" id="id"><br>
+    <button type="submit" id="submit">DELETE</button>
+    <script>
+
+        document.getElementById('submit').addEventListener('click', () => {
+            const id = +document.getElementById('id').value;
+
+            const request = new XMLHttpRequest();
+            request.open('DELETE', `http://localhost:5000/api/banks/${id}`, true);
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.onreadystatechange = () => {
+                if (request.readyState == 4) {
+                    if (request.status == 200) {
+                        alert("Success delete bank");
+                    } else {
+                        alert("Error delete bank");
+                        console.log(request.status);
+                        console.log(request.response);
+                    }
+                }
+            }
+            request.send();
+        });
+    </script>
+</body>
+</html>

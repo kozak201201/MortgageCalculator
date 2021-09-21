@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <h1>Home page</h1>
+    <% if(user){%>
+        <h2>Hello <%=user.name%></h2>
+        <li><a href="/calculator">Calculate morgage</a></li>
+        <li><a href="/create">Create bank</a></li>
+        <li><a href="/update">Update bank</a></li>
+        <li><a href="/delete">Delete bank</a></li>
+        <li><a href="/auth/logout">Logout</a></li>
+    <%} else {%>
+        <li><a href="/auth/login">Login</a></li>
+    <%}%>
+</body>
+</html>
