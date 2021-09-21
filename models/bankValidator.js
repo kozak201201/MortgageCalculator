@@ -3,7 +3,7 @@ const {Bank} = require('./models');
 const MAX_LOAN=10_000_000;
 const MAX_DOWN_PAYMENT=50;
 const MIN_DOWN_PAYMENT=10;
-const MIN_LOAD_TERM_MONTH=13;
+const MIN_LOAD_TERM_MONTH=12;
 const MIN_INTEREST_RATE=0;
 const MAX_INTEREST_RATE=10;
 
@@ -53,7 +53,7 @@ class BankValidator {
 
     checkMinDownPayment(minDownPayment) {
         if (isNaN(minDownPayment)) {
-            this.errors.push('Maximum loan not number');
+            this.errors.push('Minimum down not number');
             return false;
         }
 
@@ -67,7 +67,7 @@ class BankValidator {
 
     checkLoanTermMonth(loanTermMonth) {
         if (isNaN(loanTermMonth)) {
-            this.errors.push('Maximum loan not number');
+            this.errors.push('Loan term month not number');
             return false;
         }
 
