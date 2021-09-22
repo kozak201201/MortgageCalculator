@@ -25,7 +25,7 @@
             const loanTermMonth = +document.getElementById('loanTermMonth').value;
 
             const request = new XMLHttpRequest();
-            request.open('POST', 'http://localhost:5000/api/banks', true);
+            request.open('POST', '/api/banks', true);
             request.setRequestHeader('Content-Type', 'application/json');
             request.onreadystatechange = () => {
                 if (request.readyState == 4) {

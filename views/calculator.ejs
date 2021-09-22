@@ -23,7 +23,7 @@
             const query = `?bankId=${bankId}&initialLoan=${initialLoan}&downPayment=${downPayment}`;
 
             const request = new XMLHttpRequest();
-            request.open('GET', `http://localhost:5000/api/calculator` + query, true);
+            request.open('GET', `/api/calculator` + query, true);
             request.setRequestHeader('Content-Type', 'application/json');
             request.onreadystatechange = () => {
                 if (request.readyState == 4) {
